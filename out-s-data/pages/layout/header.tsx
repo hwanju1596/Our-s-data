@@ -2,37 +2,79 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Button,
-  Stack,
   IconButton,
   Popper,
   Fade,
   Box,
   Badge,
+  AppBar,
+  Modal,
+  Backdrop, 
+  Typography
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 // const SearchButton = styled(Button)``;
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const SearchButton = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Button variant="outlined" startIcon={<SearchIcon />}>
+    <>
+    <Button onClick={handleOpen} variant="outlined" startIcon={<SearchIcon />}>
       {" "}
       #(Hash tag) Search...{" "}
     </Button>
+    <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="transition-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Fade>
+      </Modal>
+    </>
   );
 };
 
 const NotificationsButton = () => {
-  const [open, setOpen] = React.useState(false);
+  const [notificationOpen, setNotificationOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    setOpen((previousOpen) => !previousOpen);
+    setNotificationOpen((previousOpen) => !previousOpen);
   };
 
-  const canBeOpen = open && Boolean(anchorEl);
+  const canBeOpen = notificationOpen && Boolean(anchorEl);
   const id = canBeOpen ? "transition-popper" : undefined;
 
   return (
@@ -44,7 +86,7 @@ const NotificationsButton = () => {
       </IconButton>
       <Popper
         id={id}
-        open={open}
+        open={notificationOpen}
         anchorEl={anchorEl}
         placement="bottom-end"
         transition
@@ -63,17 +105,20 @@ const NotificationsButton = () => {
 
 const Header = () => {
   return (
-    <div>
-      <Stack
-        direction="row"
-        justifyContent="flex-end"
-        alignItems="center"
-        spacing={2}
-      >
+    <AppBar  color="default">
+    <Toolbar
+      disableGutters
+      sx={{
+        minHeight: 64,
+        left: 0,
+        px: 2,
+      }}
+    >
+      <Box sx={{ flexGrow: 1 }} />
       <SearchButton />
       <NotificationsButton />
-      </Stack>
-    </div>
+    </Toolbar>
+    </AppBar>
   );
 };
 
