@@ -9,21 +9,21 @@ import {
   Badge,
   AppBar,
   Modal,
-  Backdrop, 
-  Typography
+  
+  Typography,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 // const SearchButton = styled(Button)``;
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -35,21 +35,20 @@ const SearchButton = () => {
 
   return (
     <>
-    <Button onClick={handleOpen} variant="outlined" startIcon={<SearchIcon />}>
-      {" "}
-      #(Hash tag) Search...{" "}
-    </Button>
-    <Modal
+      <Button
+        onClick={handleOpen}
+        variant="outlined"
+        startIcon={<SearchIcon />}
+      >
+        {" "}
+        #(Hash tag) Search...{" "}
+      </Button>
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
         onClose={handleClose}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 111,
-          backdropFilter: "blur(5px)",
-        }}
       >
         <Fade in={open}>
           <Box sx={style}>
@@ -106,19 +105,19 @@ const NotificationsButton = () => {
 
 const Header = () => {
   return (
-    <AppBar  color="default">
-    <Toolbar
-      disableGutters
-      sx={{
-        minHeight: 64,
-        left: 0,
-        px: 2,
-      }}
-    >
-      <Box sx={{ flexGrow: 1 }} />
-      <SearchButton />
-      <NotificationsButton />
-    </Toolbar>
+    <AppBar color="default">
+      <Toolbar
+        disableGutters
+        sx={{
+          minHeight: 64,
+          left: 0,
+          px: 2,
+        }}
+      >
+        <Box sx={{ flexGrow: 1 }} />
+        <SearchButton />
+        <NotificationsButton />
+      </Toolbar>
     </AppBar>
   );
 };
