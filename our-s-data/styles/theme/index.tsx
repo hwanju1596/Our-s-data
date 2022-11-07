@@ -20,24 +20,7 @@ export const theme = createTheme({
         disableRipple: true,
       },
     },
-    MuiDialog: {
-      defaultProps: {
-        BackdropProps: {
-          sx: {
-            backdropFilter: "blur(50px)",
-          },
-        },
-      },
-    },
-    MuiModal: {
-      defaultProps: {
-        BackdropProps: {
-          sx: {
-            backdropFilter: "blur(5px)",
-          },
-        },
-      },
-    },
+
     MuiCssBaseline: {
       styleOverrides: {
         "*": {
