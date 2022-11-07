@@ -20,6 +20,24 @@ export const theme = createTheme({
         disableRipple: true,
       },
     },
+    MuiDialog: {
+      defaultProps: {
+        BackdropProps: {
+          sx: {
+            backdropFilter: "blur(50px)",
+          },
+        },
+      },
+    },
+    MuiModal: {
+      defaultProps: {
+        BackdropProps: {
+          sx: {
+            backdropFilter: "blur(5px)",
+          },
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         "*": {
@@ -37,9 +55,10 @@ export const theme = createTheme({
       },
     },
   },
+
   palette: {
     // action: {
-    //     active: '#6B7280',
+    //     active: '#6B7280',/home/hj/workspace/Out-s-data/out-s-data/node_modules/yaml
     //     focus: 'rgba(55, 65, 81, 0.12)',
     //     hover: 'Black',
     //     selected: 'rgba(55, 65, 81, 0.08)',
