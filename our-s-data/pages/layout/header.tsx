@@ -47,7 +47,8 @@ const SearchButton = () => {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
+          timeout: 111,
+          backdropFilter: "blur(5px)",
         }}
       >
         <Fade in={open}>
