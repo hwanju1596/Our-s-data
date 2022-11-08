@@ -16,17 +16,24 @@ import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 // const SearchButton = styled(Button)``;
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
+
+const SearchBox = styled(Box)(
+  ({theme}) => `
+    background-color:${theme.palette.primary.light};
+    border-radius: 10px;
+    top: 10%;
+    left: 50%;
+    position: absolute;
+    box-shadow: 0 4px 6px;
+    border: "2px solid #000";
+    // filter: blur(4px);
+    backdrop-filter: blur(10px);
+`);
+
+const backdropTest = styled('div')(
+  ({theme}) => `
+  backdrop-filter: blur(10px);
+  `);
 
 const SearchButton = () => {
   const [searchModalOpen, setSearchModalOpen] = React.useState(false);
@@ -49,17 +56,17 @@ const SearchButton = () => {
         open={searchModalOpen}
         onClose={handleClose}
         closeAfterTransition
+        // BackdropProps={ }
       >
         <Fade in={searchModalOpen}>
-        <Box sx={style}>
+        <SearchBox>
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Text in a modal
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
-          </Box>
-         
+          </SearchBox>
         </Fade>
       </Modal>
     </>
