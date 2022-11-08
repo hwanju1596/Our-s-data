@@ -9,8 +9,8 @@ import {
   Badge,
   AppBar,
   Modal,
-  
   Typography,
+  styled,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -29,9 +29,9 @@ const style = {
 };
 
 const SearchButton = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [searchModalOpen, setSearchModalOpen] = React.useState(false);
+  const handleOpen = () => setSearchModalOpen(true);
+  const handleClose = () => setSearchModalOpen(false);
 
   return (
     <>
@@ -46,12 +46,12 @@ const SearchButton = () => {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
+        open={searchModalOpen}
         onClose={handleClose}
         closeAfterTransition
       >
-        <Fade in={open}>
-          <Box sx={style}>
+        <Fade in={searchModalOpen}>
+        <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
               Text in a modal
             </Typography>
@@ -59,6 +59,7 @@ const SearchButton = () => {
               Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
             </Typography>
           </Box>
+         
         </Fade>
       </Modal>
     </>
@@ -96,6 +97,7 @@ const NotificationsButton = () => {
             <Box sx={{ border: 1, p: 1, bgcolor: "primary" }}>
               The content of the Popper.
             </Box>
+      
           </Fade>
         )}
       </Popper>
