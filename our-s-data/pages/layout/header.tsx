@@ -11,31 +11,34 @@ import {
   Modal,
   Typography,
   styled,
+  TextField,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-// const SearchButton = styled(Button)``;
-
-const SearchBox = styled(Box)(
-  ({theme}) => `
+const SearchBoxStyle = styled(Box)(
+  ({ theme }) => `
     background-color:${theme.palette.primary.light};
     border-radius: 10px;
-    top: 10%;
+    top: 50%;
     left: 50%;
     position: absolute;
-    box-shadow: 0 4px 6px;
+    transform: translate(-50%, -50%);
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
     border: "2px solid #000";
-    // filter: blur(4px);
-    backdrop-filter: blur(10px);
 `);
 
-const backdropTest = styled('div')(
-  ({theme}) => `
-  backdrop-filter: blur(10px);
-  `);
+const SearchBox = () =>
+{
+  return(
+    <>
+      <SearchIcon sx={{ fontSize: 40 }}/>
+      <TextField   id="filled-hidden-label-normal" placeholder="HashTag Search..." hiddenLabel variant="filled"/>
+    </>
+  );
+}
 
-const SearchButton = () => {
+const SearchBoxOpenButton = () => {
   const [searchModalOpen, setSearchModalOpen] = React.useState(false);
   const handleOpen = () => setSearchModalOpen(true);
   const handleClose = () => setSearchModalOpen(false);
@@ -56,17 +59,12 @@ const SearchButton = () => {
         open={searchModalOpen}
         onClose={handleClose}
         closeAfterTransition
-        // BackdropProps={ }
+        // 나중에 Backdrop Props 추가.
       >
         <Fade in={searchModalOpen}>
-        <SearchBox>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </SearchBox>
+          <SearchBoxStyle>
+            <SearchBox/>
+          </SearchBoxStyle>
         </Fade>
       </Modal>
     </>
@@ -104,7 +102,6 @@ const NotificationsButton = () => {
             <Box sx={{ border: 1, p: 1, bgcolor: "primary" }}>
               The content of the Popper.
             </Box>
-      
           </Fade>
         )}
       </Popper>
@@ -124,7 +121,7 @@ const Header = () => {
         }}
       >
         <Box sx={{ flexGrow: 1 }} />
-        <SearchButton />
+        <SearchBoxOpenButton />
         <NotificationsButton />
       </Toolbar>
     </AppBar>
