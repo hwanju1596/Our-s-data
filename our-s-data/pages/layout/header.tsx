@@ -1,5 +1,6 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import TagIcon from "@mui/icons-material/Tag";
 import {
   Button,
   IconButton,
@@ -9,16 +10,17 @@ import {
   Badge,
   AppBar,
   Modal,
-  Typography,
   styled,
   TextField,
+  InputAdornment,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const SearchBoxStyle = styled(Box)(
   ({ theme }) => `
-    background-color:${theme.palette.primary.light};
+    // background-color:${theme.palette.primary.main};
+    background-color: white;
     border-radius: 10px;
     top: 50%;
     left: 50%;
@@ -26,17 +28,35 @@ const SearchBoxStyle = styled(Box)(
     transform: translate(-50%, -50%);
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
     border: "2px solid #000";
-`);
+    
+    // 임시로 생성 모바일, 데스크탑 나눌 예정
+    width: 400px;
+    height: 400px;
+`
+);
 
-const SearchBox = () =>
-{
-  return(
+const SearchBox = () => {
+  return (
     <>
-      <SearchIcon sx={{ fontSize: 40 }}/>
-      <TextField   id="filled-hidden-label-normal" placeholder="HashTag Search..." hiddenLabel variant="filled"/>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <TextField
+          autoFocus 
+          sx={{m: 1}}
+          fullWidth
+          placeholder="HashTag Search..."
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <TagIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+        />
+      </Box>
     </>
   );
-}
+};
 
 const SearchBoxOpenButton = () => {
   const [searchModalOpen, setSearchModalOpen] = React.useState(false);
@@ -63,7 +83,7 @@ const SearchBoxOpenButton = () => {
       >
         <Fade in={searchModalOpen}>
           <SearchBoxStyle>
-            <SearchBox/>
+            <SearchBox />
           </SearchBoxStyle>
         </Fade>
       </Modal>
@@ -96,10 +116,11 @@ const NotificationsButton = () => {
         anchorEl={anchorEl}
         placement="bottom-end"
         transition
+        sx={{zIndex: 5000}}
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Box sx={{ border: 1, p: 1, bgcolor: "primary" }}>
+            <Box sx={{ border: 1, p: 1, bgcolor: "primary",  backgroundColor: 'primary.dark', width:200, height: 200}}>
               The content of the Popper.
             </Box>
           </Fade>
