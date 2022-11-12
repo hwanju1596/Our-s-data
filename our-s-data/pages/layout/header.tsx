@@ -1,5 +1,6 @@
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import TagIcon from "@mui/icons-material/Tag";
 import {
   Button,
   IconButton,
@@ -9,26 +10,56 @@ import {
   Badge,
   AppBar,
   Modal,
-  Typography,
   styled,
+  TextField,
+  InputAdornment,
+  Popover,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-// const SearchButton = styled(Button)``;
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+const SearchBoxStyle = styled(Box)(
+  ({ theme }) => `
+    // background-color:${theme.palette.primary.main};
+    background-color: white;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+    border: "2px solid #000";
+    
+    // 임시로 생성 모바일, 데스크탑 나눌 예정
+    width: 400px;
+    height: 400px;
+`
+);
+
+const SearchBox = () => {
+  return (
+    <>
+      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+        <TextField
+          autoFocus
+          sx={{ m: 1 }}
+          fullWidth
+          placeholder="HashTag Search..."
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <TagIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+        />
+      </Box>
+    </>
+  );
 };
 
-const SearchButton = () => {
+const SearchBoxOpenButton = () => {
   const [searchModalOpen, setSearchModalOpen] = React.useState(false);
   const handleOpen = () => setSearchModalOpen(true);
   const handleClose = () => setSearchModalOpen(false);
@@ -49,17 +80,12 @@ const SearchButton = () => {
         open={searchModalOpen}
         onClose={handleClose}
         closeAfterTransition
+        // 나중에 Backdrop Props 추가.
       >
         <Fade in={searchModalOpen}>
-        <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
-          </Box>
-         
+          <SearchBoxStyle>
+            <SearchBox />
+          </SearchBoxStyle>
         </Fade>
       </Modal>
     </>
@@ -67,17 +93,18 @@ const SearchButton = () => {
 };
 
 const NotificationsButton = () => {
-  const [notificationOpen, setNotificationOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    setNotificationOpen((previousOpen) => !previousOpen);
   };
 
-  const canBeOpen = notificationOpen && Boolean(anchorEl);
-  const id = canBeOpen ? "transition-popper" : undefined;
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <IconButton size="large" color="primary" onClick={handleClick}>
@@ -85,22 +112,24 @@ const NotificationsButton = () => {
           <NotificationsIcon />
         </Badge>
       </IconButton>
-      <Popper
+      <Popover
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
         id={id}
-        open={notificationOpen}
+        open={open}
+        onClose={handleClose}
         anchorEl={anchorEl}
-        placement="bottom-end"
-        transition
       >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Box sx={{ border: 1, p: 1, bgcolor: "primary" }}>
+           <Box sx={{ border: 1, p: 1, bgcolor: "primary",  backgroundColor: 'primary.dark', width:200, height: 200}}>
               The content of the Popper.
             </Box>
-      
-          </Fade>
-        )}
-      </Popper>
+      </Popover>
     </>
   );
 };
@@ -117,7 +146,7 @@ const Header = () => {
         }}
       >
         <Box sx={{ flexGrow: 1 }} />
-        <SearchButton />
+        <SearchBoxOpenButton />
         <NotificationsButton />
       </Toolbar>
     </AppBar>

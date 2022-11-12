@@ -2,9 +2,10 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import CircleVisualization from "../components/circle-virtualization";
 import Header from "./layout/header";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Toolbar } from "@mui/material";
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -24,7 +25,10 @@ export default function Home() {
               opacity: [0.9, 0.8, 0.7],
             },
           }}
-        />
+        >
+          <Toolbar/>
+          <CircleVisualization views={undefined} likes={undefined} title={""} contents={""}/>
+          </Box>
       </Container>
     </div>
   );
