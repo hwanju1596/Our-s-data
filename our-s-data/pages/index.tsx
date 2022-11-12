@@ -3,8 +3,32 @@ import styles from "../styles/Home.module.css";
 import CircleVisualization from "../components/circle-virtualization";
 import Header from "./layout/header";
 import { Box, Container, Toolbar } from "@mui/material";
+import styled from '@emotion/styled';
+
+const CircleCanvas = styled.div`
+  // width: 100%;
+  // height: 10%;
+  // position: static ;
+`;
 
 export default function Home() {
+  type CircleInfo = {
+    views: number;
+    likes: number;
+    title: string;
+    contents: string;
+  };
+
+  const tempCircleInfoArr: CircleInfo[] = [
+    { views: 30, likes: 5, title: "Title 0", contents: "Contents 0" },
+    { views: 10, likes: 3, title: "Title 1", contents: "Contents 1" },
+    { views: 15, likes: 8, title: "Title 2", contents: "Contents 2" },
+    { views: 5, likes: 70, title: "Title 3", contents: "Contents 3" },
+    { views: 1, likes: 25, title: "Title 4", contents: "Contents 4" },
+    { views: 2, likes: 20, title: "Title 5", contents: "Contents 5" },
+    { views: 70, likes: 10, title: "Title 6", contents: "Contents 6" },
+    { views: 35, likes: 29, title: "Title 7", contents: "Contents 7" }
+  ];
 
   return (
     <div className={styles.container}>
@@ -26,9 +50,20 @@ export default function Home() {
             },
           }}
         >
-          <Toolbar/>
-          <CircleVisualization views={undefined} likes={undefined} title={""} contents={""}/>
-          </Box>
+          <Toolbar />
+          <CircleCanvas>
+            {tempCircleInfoArr.map((args) => {
+              return (
+                <CircleVisualization
+                  views={args.views}
+                  likes={args.likes}
+                  title={args.title}
+                  contents={args.contents}
+                />
+              );
+            })}
+          </CircleCanvas>
+        </Box>
       </Container>
     </div>
   );
