@@ -100,7 +100,7 @@ const NotificationsButton = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'NotificationButton' : undefined;
 
   const handleClose = () => {
     setAnchorEl(null);

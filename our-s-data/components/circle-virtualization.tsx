@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
-import {RefObject, useRef} from 'react'
+import { Popover, Tooltip } from '@mui/material';
+import React from 'react';
+import {RefObject, useRef, useState} from 'react'
 
 type Props = {
     // raingking: Number,
@@ -14,7 +16,11 @@ type Props = {
 
 const CircleVisualization = (props: Props) => {
     const ranking: number = 0;
+    const [isHovering, setIsHovering] = React.useState(false);
+
+    const handleClose = () => {setIsHovering(false); console.log("12312412421");}
     // const canvasRef: RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null); 애니메이션은 나중에
+
     var size: number = 0;
     size = props.views * 0.2;
     size += (props.likes * 0.4);
@@ -31,7 +37,11 @@ const CircleVisualization = (props: Props) => {
   
   return (
     <>
-      <Circle/>
+      <Circle
+      onMouseOver={() => setIsHovering(true)}
+      onMouseOut={() => setIsHovering(false)}
+      />
+      {props.contents}
     </>
   )
 }
