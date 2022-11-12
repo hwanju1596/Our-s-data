@@ -13,6 +13,7 @@ import {
   styled,
   TextField,
   InputAdornment,
+  Popover,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -40,8 +41,8 @@ const SearchBox = () => {
     <>
       <Box sx={{ display: "flex", alignItems: "flex-end" }}>
         <TextField
-          autoFocus 
-          sx={{m: 1}}
+          autoFocus
+          sx={{ m: 1 }}
           fullWidth
           placeholder="HashTag Search..."
           InputProps={{
@@ -92,17 +93,18 @@ const SearchBoxOpenButton = () => {
 };
 
 const NotificationsButton = () => {
-  const [notificationOpen, setNotificationOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    setNotificationOpen((previousOpen) => !previousOpen);
   };
 
-  const canBeOpen = notificationOpen && Boolean(anchorEl);
-  const id = canBeOpen ? "transition-popper" : undefined;
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <IconButton size="large" color="primary" onClick={handleClick}>
@@ -110,22 +112,24 @@ const NotificationsButton = () => {
           <NotificationsIcon />
         </Badge>
       </IconButton>
-      <Popper
+      <Popover
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
         id={id}
-        open={notificationOpen}
+        open={open}
+        onClose={handleClose}
         anchorEl={anchorEl}
-        placement="bottom-end"
-        transition
-        sx={{zIndex: 5000}}
       >
-        {({ TransitionProps }) => (
-          <Fade {...TransitionProps} timeout={350}>
-            <Box sx={{ border: 1, p: 1, bgcolor: "primary",  backgroundColor: 'primary.dark', width:200, height: 200}}>
+           <Box sx={{ border: 1, p: 1, bgcolor: "primary",  backgroundColor: 'primary.dark', width:200, height: 200}}>
               The content of the Popper.
             </Box>
-          </Fade>
-        )}
-      </Popper>
+      </Popover>
     </>
   );
 };
