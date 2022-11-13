@@ -4,7 +4,6 @@ import TagIcon from "@mui/icons-material/Tag";
 import {
   Button,
   IconButton,
-  Popper,
   Fade,
   Box,
   Badge,
@@ -147,6 +146,7 @@ const Header = () => {
       >
         <Box sx={{ flexGrow: 1 }} />
         <SearchBoxOpenButton />
+        
         <NotificationsButton />
       </Toolbar>
     </AppBar>

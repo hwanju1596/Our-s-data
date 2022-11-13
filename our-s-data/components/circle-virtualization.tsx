@@ -12,17 +12,16 @@ type Props = {
     contents: string,
 }
 
-
-
 const CircleVisualization = (props: Props) => {
     const ranking: number = 0;
     const [isHovering, setIsHovering] = React.useState(false);
 
     const handleClose = () => {setIsHovering(false); console.log("12312412421");}
-    // const canvasRef: RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null); 애니메이션은 나중에
 
     var size: number = 0;
-    size = props.views * 0.2;
+
+    // Circle 총 개수에 따라 사이즈 작게 수정해야함. 2022-11-13 [LHJ]
+    size = props.views * 0.1;
     size += (props.likes * 0.4);
 
     const Circle = styled.span`

@@ -45,7 +45,7 @@ export default function Home() {
             height: "120vh",
             backgroundColor: "gray",
             "&:hover": {
-              backgroundColor: "primary.main",
+              backgroundColor: "primary",
               opacity: [0.9, 0.8, 0.7],
             },
           }}
@@ -55,6 +55,7 @@ export default function Home() {
             {tempCircleInfoArr.map((args) => {
               return (
                 <CircleVisualization
+                   key = {args.title} // 나중에 고유키 적용
                   views={args.views}
                   likes={args.likes}
                   title={args.title}
