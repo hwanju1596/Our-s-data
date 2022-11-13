@@ -11,6 +11,12 @@ type Props = {
     title: string,
     contents: string,
 }
+export const Listvisualization = () =>{
+  console.log("List Vitualization");
+  return(
+  <>
+  </>);
+}
 
 const CircleVisualization = (props: Props) => {
     const ranking: number = 0;
