@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import CircleVisualization from "../components/circle-virtualization";
+import CircleVisualization, { Listvisualization } from "../components/data-visualization";
 import Header from "./layout/header";
 import { Box, Container, Toolbar } from "@mui/material";
 import styled from '@emotion/styled';
@@ -44,17 +44,18 @@ export default function Home() {
             bgcolor: "#cfe8fc",
             height: "120vh",
             backgroundColor: "gray",
-            "&:hover": {
-              backgroundColor: "primary.main",
-              opacity: [0.9, 0.8, 0.7],
-            },
+            // "&:hover": {
+            //   backgroundColor: "primary",
+            //   opacity: [0.9, 0.8, 0.7],
+            // },
           }}
         >
           <Toolbar />
           <CircleCanvas>
             {tempCircleInfoArr.map((args) => {
               return (
-                <CircleVisualization
+                <Listvisualization
+                  key = {args.title} // 나중에 고유키 적용
                   views={args.views}
                   likes={args.likes}
                   title={args.title}

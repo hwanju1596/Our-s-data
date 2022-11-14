@@ -4,7 +4,6 @@ import TagIcon from "@mui/icons-material/Tag";
 import {
   Button,
   IconButton,
-  Popper,
   Fade,
   Box,
   Badge,
@@ -100,7 +99,7 @@ const NotificationsButton = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? 'NotificationButton' : undefined;
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -147,6 +146,7 @@ const Header = () => {
       >
         <Box sx={{ flexGrow: 1 }} />
         <SearchBoxOpenButton />
+        
         <NotificationsButton />
       </Toolbar>
     </AppBar>
