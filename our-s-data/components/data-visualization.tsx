@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Popover, Tooltip } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Popover, Tooltip, Typography } from '@mui/material';
 import React from 'react';
 import {RefObject, useRef, useState} from 'react'
 
@@ -11,11 +11,36 @@ type Props = {
     title: string,
     contents: string,
 }
-export const Listvisualization = () =>{
+
+export const Listvisualization = (props: Props) =>{
   console.log("List Vitualization");
   return(
-  <>
-  </>);
+    <Card sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
+          <Typography component="div" variant="caption">
+            {props.title}
+          </Typography>
+          <Typography
+            variant="h6"
+            color="text.secondary"
+            component="div"
+          >
+            {props.contents}
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+         
+        </Box>
+      </Box>
+      <CardMedia
+        component="img"
+        sx={{ width: 151 }}
+        // image=""
+        alt="Instagram Img"
+      />
+    </Card>
+  );
 }
 
 const CircleVisualization = (props: Props) => {
