@@ -37,9 +37,36 @@ export const theme = createTheme({
         },
       },
     },
+
+    MuiCard: {
+      styleOverrides: {
+        root: {
+            color: "#fff",
+            background: "#152E35",
+        },
+      }
+    },
+
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+            // color: "#507681",
+            // background: "#507681",
+        },
+      }
+    },
   },
 
   palette: {
+    background: {
+      default: "#351522",
+
+    },
+    text: {
+      primary: "#fff",
+      secondary: "#fff",
+      // disabled: "#fff"
+  },
     // action: {
     //     active: '#6B7280',/home/hj/workspace/Out-s-data/out-s-data/node_modules/yaml
     //     focus: 'rgba(55, 65, 81, 0.12)',

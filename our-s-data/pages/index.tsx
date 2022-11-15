@@ -1,16 +1,23 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import CircleVisualization, { Listvisualization } from "../components/data-visualization";
+import CircleVisualization, {
+  Listvisualization,
+} from "../components/data-visualization";
 import Header from "./layout/header";
-import { Box, Container, Toolbar } from "@mui/material";
-import styled from '@emotion/styled';
+import { Box, Card, CardHeader, CardMedia, Container, Grid, Toolbar } from "@mui/material";
+import styled from "@emotion/styled";
 
 const CircleCanvas = styled.div`
   // width: 100%;
   // height: 10%;
   // position: static ;
 `;
-
+type PostInfoProps = {
+  views: number;
+  likes: number;
+  title: string;
+  contents: string;
+}
 export default function Home() {
   type CircleInfo = {
     views: number;
@@ -27,8 +34,27 @@ export default function Home() {
     { views: 1, likes: 25, title: "Title 4", contents: "Contents 4" },
     { views: 2, likes: 20, title: "Title 5", contents: "Contents 5" },
     { views: 70, likes: 10, title: "Title 6", contents: "Contents 6" },
-    { views: 35, likes: 29, title: "Title 7", contents: "Contents 7" }
+    { views: 35, likes: 29, title: "Title 7", contents: "Contents 7" },
   ];
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("props.contents");
+  };
+
+  const ASide = (props: PostInfoProps) => {
+    return (
+      <Card>
+        <CardHeader title={props.title}/>
+        <CardMedia
+        component="img"
+        height="500"
+        // image=""
+        alt="Detail Img"
+        />
+        {props.contents}
+      </Card>
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -41,29 +67,35 @@ export default function Home() {
         <Header />
         <Box
           sx={{
-            bgcolor: "#cfe8fc",
+            bgcolor: "#351522",
             height: "120vh",
-            backgroundColor: "gray",
-            // "&:hover": {
-            //   backgroundColor: "primary",
-            //   opacity: [0.9, 0.8, 0.7],
-            // },
           }}
         >
           <Toolbar />
-          <CircleCanvas>
-            {tempCircleInfoArr.map((args) => {
-              return (
-                <Listvisualization
+          <Grid container spacing={2}>
+            <Grid item xs={6} md={8}>
+              <CircleCanvas>
+                {tempCircleInfoArr.map((args) => {
+                  return (
+                    <Listvisualization
                   key = {args.title} // 나중에 고유키 적용
-                  views={args.views}
-                  likes={args.likes}
-                  title={args.title}
-                  contents={args.contents}
-                />
-              );
-            })}
-          </CircleCanvas>
+                      views={args.views}
+                      likes={args.likes}
+                      title={args.title}
+                      contents={args.contents}
+                    />
+                  );
+                })}
+              </CircleCanvas>
+            </Grid>
+            <Grid item xs={6} md={4}>
+                <ASide  
+                      views={1}
+                      likes={2}
+                      title={"test"}
+                      contents={"test"}/>
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </div>

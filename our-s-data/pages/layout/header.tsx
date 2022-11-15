@@ -29,7 +29,7 @@ const SearchBoxStyle = styled(Box)(
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
     border: "2px solid #000";
     
-    // 임시로 생성 모바일, 데스크탑 나눌 예정
+    // 임시로 생성 (모바일, 데스크탑 나눌 예정)
     width: 400px;
     height: 400px;
 `
@@ -139,14 +139,13 @@ const Header = () => {
       <Toolbar
         disableGutters
         sx={{
-          minHeight: 64,
-          left: 0,
-          px: 2,
+          // minHeight: 64,
+          // left: 0,
+          // px: 2,
         }}
       >
         <Box sx={{ flexGrow: 1 }} />
         <SearchBoxOpenButton />
-        
         <NotificationsButton />
       </Toolbar>
     </AppBar>
